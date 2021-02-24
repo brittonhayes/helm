@@ -2,6 +2,28 @@ apiVersion: v1
 entries:
   micro:
   - apiVersion: v2
+    appVersion: 3.1.0
+    created: "2021-02-24T09:42:54.948351364Z"
+    description: Micro is a platform for cloud native microservices development. Install Micro on Kubernetes in one command.
+    digest: a36d989c134771001de15aa268010e60399a881f96dc87973eee81b5c2e56607
+    home: https://micro.mu
+    icon: https://avatars2.githubusercontent.com/u/5161210
+    keywords:
+    - platform
+    - microservices
+    - golang
+    maintainers:
+    - email: contact@micro.mu
+      name: Micro Authors
+      url: https://micro.mu/
+    name: micro
+    sources:
+    - https://github.com/micro/micro
+    type: application
+    urls:
+    - https://github.com/micro/helm/releases/download/micro-1.2.0/micro-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v2
     appVersion: 3.0.1
     created: "2020-11-22T07:43:36.447050705Z"
     description: Micro is a platform for cloud native microservices development. Install Micro on Kubernetes in one command.
