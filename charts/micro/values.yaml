@@ -4,5 +4,3 @@
 image:
   repo: micro/micro
   tag: latest
-
-createNamespace: false
