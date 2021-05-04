@@ -1,17 +1,19 @@
+{{ if .createNamespace }}
 kind: Namespace
 apiVersion: v1
 metadata:
   name: micro
+{{ end }}
 ---
 kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: store-pv
-  namespace: micro
+  namespace: "{{ if not .createNamespace }}{{.Release.Namespace}}{{else}}micro{{end}}"
 spec:
   claimRef:
     name: store-pvc
-    namespace: micro
+    namespace: "{{ if not .createNamespace }}{{.Release.Namespace}}{{else}}micro{{end}}"
   storageClassName: standard
   capacity:
     storage: 3Gi
@@ -24,7 +26,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: store-pvc
-  namespace: micro
+  namespace: "{{ if not .createNamespace }}{{.Release.Namespace}}{{else}}micro{{end}}"
 spec:
   storageClassName: standard
   accessModes:
@@ -37,13 +39,13 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: micro
-  namespace: micro
+  namespace: "{{ if not .createNamespace }}{{.Release.Namespace}}{{else}}micro{{end}}"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: micro
-  namespace: micro
+  namespace: "{{ if not .createNamespace }}{{.Release.Namespace}}{{else}}micro{{end}}"
 rules:
 - apiGroups:
   - ""
@@ -101,11 +103,11 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: micro
-  namespace: micro
+  namespace: "{{ if not .createNamespace }}{{.Release.Namespace}}{{else}}micro{{end}}"
 subjects:
 - kind: ServiceAccount
   name: micro
-  namespace: micro
+  namespace: "{{ if not .createNamespace }}{{.Release.Namespace}}{{else}}micro{{end}}"
 roleRef:
   kind: ClusterRole
   name: micro
@@ -115,7 +117,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: micro
-  namespace: micro
+  namespace: "{{ if not .createNamespace }}{{.Release.Namespace}}{{else}}micro{{end}}"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -127,8 +129,8 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  namespace: micro
   name: micro
+  namespace: "{{ if not .createNamespace }}{{.Release.Namespace}}{{else}}micro{{end}}"
 spec:
   template:
     spec:
